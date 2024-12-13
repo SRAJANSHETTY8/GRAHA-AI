@@ -95,6 +95,6 @@ Developers:
 Developed by Sraaz Developers.
 
 ![image alt](https://github.com/SRAJANSHETTY8/GRAHA-AI/blob/f984d51144bfeded10e32d3453078a8944492537/readme%20img/ai01.png)
-![image alt](https://github.com/SRAJANSHETTY8/GRAHA-AI/blob/1b5711d67886c0afa6975b0f707b296d501f7c21/readme%20img/ai03.png)
+![image alt](https://github.com/SRAJANSHETTY8/GRAHA-AI/blob/d563f49361c65aa1cdb42daef5ea1fe502878851/readme%20img/ai02.png)
 ![image alt](https://github.com/SRAJANSHETTY8/GRAHA-AI/blob/6d54ca9ef131a4c43a3dc9fe32da773361a1d7bb/readme%20img/ai04.png)
 ![image alt]()
