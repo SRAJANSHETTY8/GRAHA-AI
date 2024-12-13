@@ -95,7 +95,7 @@ Developers:
 Developed by Sraaz Developers.
 
 ![image alt](https://github.com/SRAJANSHETTY8/GRAHA-AI/blob/0511cb20d1e3b1ad98236a74b45573ffc85abd9f/readme%20img/ai01.png)
-![image alt]()
+![image alt](https://github.com/SRAJANSHETTY8/GRAHA-AI/blob/566a23eba8ac5932c28ccacd228af6c0cf69b396/readme%20img/ai02.png)
 ![image alt]()
 ![image alt]()
 ![image alt]()
