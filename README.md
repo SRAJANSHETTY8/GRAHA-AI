@@ -10,16 +10,31 @@ Customizable inputs: Users can specify the number of bedrooms, bathrooms, garage
 User-friendly interface: The frontend is built using Flask, making it intuitive and easy to interact with.
 Image processing and visualization: Floor plans are visualized in a user-friendly format for a more interactive experience.
 Scalable design: The backend is built to scale, capable of handling various user inputs and generating floor plans accordingly.
+
+
 Tech Stack:
+
 Frontend: HTML, CSS, JavaScript (Flask for integration)
+
 Backend: Python, Flask
+
+
 Machine Learning Model: K-Nearest Neighbors (KNN) algorithm
+
 Dataset: Custom dataset containing floor plans and labels (rooms, garage, etc.)
+
+
+
 Setup Instructions:
+
 Prerequisites:
+
 Python 3.x installed
+
 Flask installed (pip install flask)
+
 Required libraries: scikit-learn, numpy, pandas, etc.
+
 
 Installation:
 
