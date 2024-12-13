@@ -1,0 +1,28 @@
+# Graha.AI - 2D AI Home Plan Predictor
+
+Graha.AI is an innovative web-based application that uses Artificial Intelligence (AI) to generate floor plans for homes based on user inputs. The primary aim of the project is to provide users with customized floor plans tailored to their specific needs, such as the number of bedrooms, bathrooms, living areas, and other important spaces. The application uses a K-Nearest Neighbors (KNN) model to predict floor plans based on a dataset of floor plans that have been pre-trained with various room configurations.
+
+Upon entering the necessary details, such as the number of bedrooms, bathrooms, garage, and other spaces, the system predicts the most suitable floor plan that matches the user’s input. The AI model is trained using labeled data and aims to accurately generate a layout that reflects real-life house plans. This project represents the fusion of AI and real estate design, creating an intuitive and user-friendly tool for people looking to design their dream homes.
+
+The front end of the project is built using Flask, while the backend employs machine learning algorithms to power the prediction engine. The application is designed to be scalable, easy to use, and integrates seamlessly with modern web technologies.
+
+This project also includes features like:
+- User-friendly interface to input house dimensions and room configurations
+- AI-driven floor plan predictions based on user input
+- Image processing and visualization of floor plans
+- Scalable design that can handle various user inputs
+
+### Developers:
+Developed by Sraaz Developers
+
+Flask==3.1.0
+scikit-learn==1.5.2
+numpy==2.0.2
+pandas==2.2.3
+tensorflow==2.18.0
+Flask-Cors==3.1.1
+requests==2.32.3
+Pillow==11.0.0
+Werkzeug==3.1.3
+Markdown==3.7
+joblib==1.4.2
