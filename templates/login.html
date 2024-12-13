@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graha.ai</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url('/static/images/home.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0 0 20px 0;
+        }
+
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            text-align: center;
+            transition: filter 0.3s ease;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background-color: #808080;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #696969;
+        }
+
+        .developer-credit {
+            position: absolute;
+            bottom: 60px;
+            text-align: center;
+            font-size: 12px;
+            color: white;
+            width: 100%;
+        }
+
+        a {
+            color: #add8e6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading Animation Styles */
+        .loading-container {
+            display: none;
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+        }
+
+        .floor-plan-animation {
+            display: inline-block;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 20px 0;
+        }
+
+        .room {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #add8e6;
+            animation: roomAnimation 1.5s ease-in-out infinite;
+        }
+
+        .room1 {
+            top: 0;
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .room2 {
+            top: 0;
+            left: 35px;
+            animation-delay: 0.5s;
+        }
+
+        .room3 {
+            top: 35px;
+            left: 0;
+            animation-delay: 1s;
+        }
+
+        .room4 {
+            top: 35px;
+            left: 35px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes roomAnimation {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Blur Effect for Form */
+        .blurred {
+            filter: blur(5px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">𝙶𝖗𝖆𝖍𝖆.𝙰i⾕</div>
+
+    <div class="form-container" id="formContainer">
+        <form action="/login" method="POST" id="loginForm" onsubmit="return showLoginAnimation()">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter Username" required>
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter Password" required>
+
+            <button type="submit" id="loginButton">Login</button>
+
+            <p>Don't have an account? <a href="/signup" id="signupLink" onclick="showLoadingAnimation(event)">Sign up</a></p>
+        </form>
+    </div>
+
+    <div class="developer-credit">
+        <p> © Developed by Sraaz Developers</p>
+    </div>
+
+    <!-- Loading Animation -->
+    <div class="loading-container" id="loadingContainer">
+        <div class="floor-plan-animation" id="floorPlanAnimation">
+            <div class="room room1"></div>
+            <div class="room room2"></div>
+            <div class="room room3"></div>
+            <div class="room room4"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Show animation before navigating to signup page
+        function showLoadingAnimation(event) {
+            event.preventDefault(); 
+            document.getElementById('loadingContainer').style.display = 'block';
+            document.getElementById('formContainer').classList.add('blurred'); 
+
+            setTimeout(function() {
+                window.location.href = '/signup';
+            }, 3000);
+        }
+
+        // Show animation before submitting the login form
+        function showLoginAnimation() {
+            document.getElementById('loadingContainer').style.display = 'block';
+            document.getElementById('formContainer').classList.add('blurred');
+            
+            setTimeout(function() {
+                document.getElementById('loginForm').submit();
+            }, 3000); // Adjusted delay for animation
+            return false; 
+        }
+    </script>
+
+</body>
+</html>

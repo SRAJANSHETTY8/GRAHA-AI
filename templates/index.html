@@ -1,1 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graha.ai</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url('/static/images/home.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+        }
 
+        h1 {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 50px;
+             margin: 0;
+            }    
+        .form-container {
+            width: 50%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .input-container {
+            position: relative;
+            width: 100%;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .plus-minus-buttons {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+        }
+
+        .plus-minus-buttons button {
+            background-color: transparent;
+            color: black;
+            border: 1px solid #ddd;
+            padding: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+
+        .plus-minus-buttons button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            background-color: #808080; /* Grey color */
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #696969; /* Darker grey for hover */
+        }
+
+        .loading-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Floor plan animation styles */
+        .floor-plan-animation {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .room {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background-color: rgba(128, 128, 128, 0.6); /* Grey color */
+            border-radius: 5px;
+            animation: moveRoom 6s linear infinite;
+        }
+
+        .room1 {
+            animation-delay: 0s;
+        }
+
+        .room2 {
+            animation-delay: 1s;
+        }
+
+        .room3 {
+            animation-delay: 2s;
+        }
+
+        @keyframes moveRoom {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(150px, 150px);
+            }
+            100% {
+                transform: translate(300px, 300px);
+            }
+        }
+
+        .blurred {
+            filter: blur(5px);
+            pointer-events: none;
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: white;
+            font-size: 18px;
+        }
+
+        /* Small header for developer credit */
+        .developer-credit {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>𝙶𝖗𝖆𝖍𝖆.𝙰i⾕</h1>
+
+    <div class="form-container" id="formContainer">
+        <form action="/generate" method="POST" id="floorPlanForm">
+            <label for="bedrooms">Bedrooms</label>
+            <div class="input-container">
+                <input type="number" name="bedrooms" id="bedrooms" placeholder="Enter the Number of Bedrooms" required>
+                <div class="plus-minus-buttons">
+                    <button type="button" onclick="changeValue('bedrooms', -1)">-</button>
+                    <button type="button" onclick="changeValue('bedrooms', 1)">+</button>
+                </div>
+            </div>
+
+            <label for="bathrooms">Bathrooms</label>
+            <div class="input-container">
+                <input type="number" name="bathrooms" id="bathrooms" placeholder="Enter the Number of Bathrooms" required>
+                <div class="plus-minus-buttons">
+                    <button type="button" onclick="changeValue('bathrooms', -1)">-</button>
+                    <button type="button" onclick="changeValue('bathrooms', 1)">+</button>
+                </div>
+            </div>
+
+            <label for="kitchen">Kitchen</label>
+            <div class="input-container">
+                <input type="number" name="kitchen" id="kitchen" placeholder="Enter the Number of  Kitchen" required>
+                <div class="plus-minus-buttons">
+                    <button type="button" onclick="changeValue('kitchen', -1)">-</button>
+                    <button type="button" onclick="changeValue('kitchen', 1)">+</button>
+                </div>
+            </div>
+
+            <label for="living_room">Living Room</label>
+            <div class="input-container">
+                <input type="number" name="living_room" id="living_room" placeholder="Enter the Number of  Living Room" required>
+                <div class="plus-minus-buttons">
+                    <button type="button" onclick="changeValue('living_room', -1)">-</button>
+                    <button type="button" onclick="changeValue('living_room', 1)">+</button>
+                </div>
+            </div>
+
+            <label for="garage">Garage</label>
+            <div class="input-container">
+                <input type="number" name="garage" id="garage" placeholder="Enter the Number of  Garage" required>
+                <div class="plus-minus-buttons">
+                    <button type="button" onclick="changeValue('garage', -1)">-</button>
+                    <button type="button" onclick="changeValue('garage', 1)">+</button>
+                </div>
+            </div>
+
+            <label for="entry">Entry</label>
+            <div class="input-container">
+                <input type="number" name="entry" id="entry" placeholder="Enter the Number of  Entry" required>
+                <div class="plus-minus-buttons">
+                    <button type="button" onclick="changeValue('entry', -1)">-</button>
+                    <button type="button" onclick="changeValue('entry', 1)">+</button>
+                </div>
+            </div>
+
+            <label for="sqft">Square Feet</label>
+            <div class="input-container">
+                <input type="number" name="sqft" id="sqft" placeholder=" Enter the Area in Square Feet" required>
+                <div class="plus-minus-buttons">
+                    <button type="button" onclick="changeValue('sqft', -1)">-</button>
+                    <button type="button" onclick="changeValue('sqft', 1)">+</button>
+                </div>
+            </div>
+
+            <label for="prompt">Enter Design Prompt</label>
+            <input type="text" name="prompt" id="prompt" placeholder="Enter Design Prompt" required>
+
+            <button type="submit" id="findPlanButton">Generate Plans</button>
+        </form>
+    </div>
+
+    <!-- Loading Animation -->
+    <div class="loading-container" id="loadingContainer">
+        <div class="floor-plan-animation" id="floorPlanAnimation">
+            <div class="room room1"></div>
+            <div class="room room2"></div>
+            <div class="room room3"></div>
+        </div>
+        <p class="loading-text">Floor plan generating...</p>
+    </div>
+
+    <!-- Developer Credit -->
+    <div class="developer-credit">
+        <p> © Developed by Sraaz Developers</p>
+    </div>
+
+    <script>
+        function changeValue(id, increment) {
+            var inputField = document.getElementById(id);
+            inputField.value = parseInt(inputField.value) + increment;
+        }
+
+        document.getElementById("floorPlanForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Hide the form and show the loading animation
+            document.getElementById("formContainer").classList.add("blurred");
+            document.getElementById("loadingContainer").style.display = "flex";
+            document.getElementById("floorPlanAnimation").style.display = "block";
+
+            // Submit the form after a short delay (for animation effect)
+            setTimeout(function() {
+                document.getElementById("floorPlanForm").submit();
+            }, 2000);
+        });
+    </script>
+</body>
+</html

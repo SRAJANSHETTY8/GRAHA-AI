@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graha.ai - Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url('/static/images/home.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        h1 {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .form-container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background-color: #808080; /* Grey color */
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #696969; /* Darker grey for hover */
+        }
+
+        .developer-credit {
+            text-align: center;
+            font-size: 12px;
+            color: white;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+        }
+
+        a {
+            color: #add8e6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading Animation Styles */
+        .loading-container {
+            display: none;
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            text-align: center;
+            z-index: 1;
+            margin-bottom: 20px; /* Slightly adjusted to make space above developer credit */
+        }
+
+        .floor-plan-animation {
+            display: inline-block;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 20px 0;
+            margin-top: 20px;
+            z-index: 1;
+        }
+
+        .room {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #add8e6;
+            animation: roomAnimation 1.5s ease-in-out infinite;
+        }
+
+        .room1 {
+            top: 0;
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .room2 {
+            top: 0;
+            left: 35px;
+            animation-delay: 0.5s;
+        }
+
+        .room3 {
+            top: 35px;
+            left: 0;
+            animation-delay: 1s;
+        }
+
+        .room4 {
+            top: 35px;
+            left: 35px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes roomAnimation {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Error Popup Styles */
+        .error-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>𝙶𝖗𝖆𝖍𝖆.𝙰i⾕</h1>
+
+    <div class="form-container">
+        <form action="/signup" method="POST" id="signupForm">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter Username" required>
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="Enter Email" required>
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter Password" required>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
+
+            <button type="submit" id="signupButton">Sign Up</button>
+
+            <p>Already have an account? <a href="/login" id="loginLink">Login</a></p>
+        </form>
+    </div>
+
+    <!-- Loading Animation placed here -->
+    <div class="loading-container" id="loadingContainer">
+        <div class="floor-plan-animation" id="floorPlanAnimation">
+            <div class="room room1"></div>
+            <div class="room room2"></div>
+            <div class="room room3"></div>
+            <div class="room room4"></div>
+        </div>
+    </div>
+
+    <div class="developer-credit">
+        <p>Developed by Sraaz Developers</p>
+    </div>
+
+    <!-- Error Popup -->
+    <div class="error-popup" id="errorPopup">
+        Please fill in all the details before submitting.
+    </div>
+
+    <script>
+        // Handle the signup form submission and display animation on button click
+        document.getElementById('signupButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent form submission immediately
+
+            // Check if all fields are filled before submitting
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (username && email && password && confirmPassword) {
+                // Check if the passwords match before submitting
+                if (password === confirmPassword) {
+                    // Show the loading animation
+                    document.getElementById('loadingContainer').style.display = 'block';
+                    // Blur the form while the animation is visible
+                    document.querySelector('.form-container').classList.add('blurred');
+
+                    // Redirect to the login page after the animation is shown
+                    setTimeout(function() {
+                        window.location.href = '/login';
+                    }, 3000); // Delay of 3 seconds for loading animation
+                } else {
+                    alert("Passwords do not match. Please try again.");
+                }
+            } else {
+                // Show the error popup if any field is empty
+                document.getElementById('errorPopup').style.display = 'block';
+
+                // Hide the error popup after 3 seconds
+                setTimeout(function() {
+                    document.getElementById('errorPopup').style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+
+</body>
+</html>
