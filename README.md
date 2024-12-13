@@ -78,3 +78,5 @@ Developers:
 
 
 Developed by Sraaz Developers.
+
+![image alt](https://github.com/SRAJANSHETTY8/GRAHA-AI/blob/c29c14f18b0dbc358cbeacdbd1d83062e2f4008d/AI.PNG)
